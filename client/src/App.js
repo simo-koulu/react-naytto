@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import Etusivu from "./components/etusivu";
 import Login from "./components/login";
-import Dashboard from './components/Dashboard/Dasboard';
-import Preferences from './components/Preferences/Preferences';
+import Register from "./components/register";
+import Dashboard from "./components/Dashboard/Dasboard";
+import Preferences from "./components/Preferences/Preferences";
 
 function App() {
   return (
@@ -17,10 +18,14 @@ function App() {
           <li>
             <Link to="login">Kirjaudu sisään</Link>
           </li>
+          <li>
+            <Link to="register">Tee käyttäjä</Link>
+          </li>
         </ul>
         <Routes>
           <Route exact path="/" element={<Etusivu />}></Route>
           <Route exact path="login" element={<Login />}></Route>
+          <Route exact path="register" element={<Register />}></Route>
         </Routes>
       </div>
       <div className="wrapper">
@@ -36,7 +41,6 @@ function App() {
         </Routes>
       </div>
     </Router>
-    
   );
 }
 
