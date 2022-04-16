@@ -14,12 +14,12 @@ const DB = mysql.createConnection({
 });
 
 app.post("/register", (req, res) => {
-  const tunnukset = {
+  const REGtunnukset = {
     k: req.body.käyttäjätunnus,
     s: req.body.salasana,
   };
 
-  DB.query("INSERT INTO käyttäjät (kayttajatunnus, salasana) VALUES (?, ?)", [tunnukset.k, tunnukset.s], (err, result) => {
+  DB.query("INSERT INTO käyttäjät (kayttajatunnus, salasana) VALUES (?, ?)", [REGtunnukset.k, REGtunnukset.s], (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -29,6 +29,27 @@ app.post("/register", (req, res) => {
   });
 });
 
-app.listen(3001, () => {
-  console.log("toimii");
+app.post("/login", (req, res) => {
+  const LOGINtunnukset = {
+    k: req.body.käyttäjätunnus,
+    s: req.body.salasana,
+  };
+
+  DB.query("SELECT * FROM käyttäjät WHERE kayttajatunnus = ? AND salasana = ?", [LOGINtunnukset.k, LOGINtunnukset.s], (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send("Väärä tunnus tai salasana");
+    } else {
+      res.send("on käyttäjä");
+      console.log(result);
+    }
+  });
 });
+
+// app.use("/login", (req, res) => {
+//   res.send({
+//     token: "testi123",
+//   });
+// });
+
+app.listen(3001, () => console.log("toimii"));

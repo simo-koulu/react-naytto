@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { useState } from "react";
 
 import "./App.css";
 import Etusivu from "./components/etusivu";
@@ -8,6 +9,13 @@ import Dashboard from "./components/Dashboard/Dasboard";
 import Preferences from "./components/Preferences/Preferences";
 
 function App() {
+
+  const [token, setToken] = useState();
+
+  if (!token) {
+    return <Login setToken={setToken} />
+  }
+
   return (
     <Router>
       <div className="App">
