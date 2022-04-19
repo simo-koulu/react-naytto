@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, useResolvedPath } from "react-router-dom";
 import { useState } from "react";
 
 import "./App.css";
@@ -10,13 +10,22 @@ import Preferences from "./components/Preferences/Preferences";
 
 function App() {
 
-  const [token, setToken] = useState();
+  // const [token, setToken] = useState();
+  
+  const [käyttäjä, asetaKäyttäjä] = useState({tunnus: "", salasana: ""});
+  const [error, asetaError] = useState("");
 
-  if (!token) {
-    return <Login setToken={setToken} />
+
+  const login = tunnukset => {
+    console.log(tunnukset);
+  }
+
+  const logout = () => {
+    console.log("logout");
   }
 
   return (
+    
     <Router>
       <div className="App">
         <ul>
@@ -32,7 +41,7 @@ function App() {
         </ul>
         <Routes>
           <Route exact path="/" element={<Etusivu />}></Route>
-          <Route exact path="login" element={<Login />}></Route>
+          <Route exact path="login" element={<Login Login={login} error={error} /> }></Route>
           <Route exact path="register" element={<Register />}></Route>
         </Routes>
       </div>

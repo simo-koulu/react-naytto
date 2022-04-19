@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import App from "../App";
 
-function Login(setToken) {
+function Login() {
+
   const [tunnus, uusiTunnus] = useState("");
   const [salasana, uusiSalasana] = useState("");
 
@@ -14,15 +15,25 @@ function Login(setToken) {
     setPwdShown(!pwd);
   };
 
-  //   async function kirjaudu(tunnukset) {
-  //     return fetch("https://localhost:3001/login", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/JSON",
-  //       },
-  //       body: JSON.stringify(tunnukset),
-  //     }).then((data) => data.json());
-  //   }
+    // async function kirjaudu(tunnukset) {
+    //   return fetch("https://localhost:3001/login", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/JSON",
+    //     },
+    //     body: JSON.stringify(tunnukset),
+    //   }).then((data) => data.json());
+    // }
+
+    // const handleSubmit = async e => {
+    //   e.preventDefault();
+    //   const token = await kirjaudu({
+    //     tunnus,
+    //     salasana
+    //   });
+    //   props.setToken(token);
+    // }
+
 
   const kirjaudu = () => {
     Axios.post("http://localhost:3001/login", {
@@ -64,8 +75,8 @@ function Login(setToken) {
   );
 }
 
-Login.propTypes = {
-  setToken: PropTypes.func.isRequired,
-};
+// Login.propTypes = {
+//   setToken: PropTypes.func.isRequired,
+// };
 
-export default Login();
+export default Login;
