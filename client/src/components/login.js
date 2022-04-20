@@ -1,13 +1,15 @@
 import Axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
-import App from "../App";
+// import { useNavigate } from "react-router-dom";
+// import PropTypes from "prop-types";
 
-function Login() {
+import "./login.css";
 
+function Login({ login, error }) {
   const [tunnus, uusiTunnus] = useState("");
   const [salasana, uusiSalasana] = useState("");
+  const [token, setToken] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const [pwd, setPwdShown] = useState(false);
 
@@ -15,68 +17,68 @@ function Login() {
     setPwdShown(!pwd);
   };
 
-    // async function kirjaudu(tunnukset) {
-    //   return fetch("https://localhost:3001/login", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/JSON",
-    //     },
-    //     body: JSON.stringify(tunnukset),
-    //   }).then((data) => data.json());
-    // }
+  async function submitHandler(e) {
+    e.preventDefault();
 
-    // const handleSubmit = async e => {
-    //   e.preventDefault();
-    //   const token = await kirjaudu({
-    //     tunnus,
-    //     salasana
-    //   });
-    //   props.setToken(token);
-    // }
+    const tunnukset = { tunnus, token, success };
 
-
-  const kirjaudu = () => {
     Axios.post("http://localhost:3001/login", {
       käyttäjätunnus: tunnus,
       salasana: salasana,
     }).then((response) => {
-      console.log(response.data);
+      console.log(response);
+
+      if (response.data.status === 600) {
+        setToken(response.data.token);
+        setSuccess(true);
+      } else if (response.data.status === 500) {
+        console.log("jotain meni vikaan tai väärät tunnukset");
+        console.log("ERROR");
+      } else console.log("ERROR");
     });
-  };
+
+    console.log(tunnus, salasana);
+    login(tunnukset);
+  }
 
   return (
     <div className="login-form">
-      <h2>Kirjaudu sisään</h2>
+      <form onSubmit={submitHandler}>
+        <h2>Kirjaudu sisään</h2>
+        <br />
+        {/* ERROR */}
+        <div className="form-group">
+          <label htmlFor="tunnus">Käyttäjätunnus</label>
+          <br />
+          <input
+            type="text"
+            id="tunnus"
+            name="tunnus"
+            onChange={(e) => {
+              uusiTunnus(e.target.value);
+            }}
+          />
+        </div>
+        <br />
+        <div className="form-group">
+          <label htmlFor="salasana">Salasana</label>
+          <br />
+          <input
+            type={pwd ? "text" : "password"}
+            id="password"
+            name="salasana"
+            onChange={(e) => {
+              uusiSalasana(e.target.value);
+            }}
+          />
+        </div>
+        <br />
 
-      <label>Käyttäjätunnus</label>
-      <br />
-      <input
-        type="text"
-        id="tunnus"
-        onChange={(e) => {
-          uusiTunnus(e.target.value);
-        }}
-      />
-      <br />
-      <label>Salasana</label>
-      <br />
-      <input
-        type={pwd ? "text" : "password"}
-        id="password"
-        onChange={(e) => {
-          uusiSalasana(e.target.value);
-        }}
-      />
-      <br />
-
+        <input type="submit" value="Kirjaudu sisään" />
+      </form>
       <button onClick={togglePwd}>Näytä salasana</button>
-      <button onClick={kirjaudu}>Kirjaudu sisään</button>
     </div>
   );
 }
-
-// Login.propTypes = {
-//   setToken: PropTypes.func.isRequired,
-// };
 
 export default Login;

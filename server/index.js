@@ -40,16 +40,18 @@ app.post("/login", (req, res) => {
       console.log(err);
       res.send("Väärä tunnus tai salasana");
     } else {
-      res.send("on käyttäjä");
+      
+      if (result < 10) {
+        res.send({status: 500})
+      } else {
+        res.send({
+          status: 600,
+          token: "testi123",
+        })
+      }
       console.log(result);
     }
   });
 });
-
-// app.use("/login", (req, res) => {
-//   res.send({
-//     token: "testi123",
-//   });
-// });
 
 app.listen(3001, () => console.log("toimii"));

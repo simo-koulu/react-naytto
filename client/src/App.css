@@ -1,7 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+* {
+  margin: 0;
+}
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .App {
@@ -10,4 +14,56 @@ body {
 
 .wrapper {
   padding: 20px;
+}
+
+.header-container {
+  list-style: none;
+  /* border: 1px solid blue; */
+
+  display: flex;
+  padding-left: 0;
+  background-color: #0f165c;
+
+  /* aspect-ratio: 900/43;
+  width: 100%;
+  background-image: url("../public/layered-waves-haikei.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; */
+}
+
+.header-container::after {
+  content: "";
+  clear: both;
+  display: table;
+} 
+
+li {
+  width: 33.3%;
+  height: 10vh;
+
+  /* border: 1px solid red; */
+
+  /* padding: 0.5rem; */
+  left: 0;
+  text-align: center;
+  line-height: 9vh;
+}
+
+.header-button {
+  height: 10vh;
+  width: 100%;
+  display: inline-block;
+
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  /* border: 1px solid green; */
+  font-size: 20px;
+}
+
+.header-button:hover {
+  background-color: #285cbd;
+  transition: 100ms;
+  /* transform: translateY(5px); */
 }

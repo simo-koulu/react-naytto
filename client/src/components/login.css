@@ -1,3 +1,7 @@
 input{
     margin: 0.3vh 2vw 1vh 0.2vw;
 }
+
+.login-form {
+    padding: 50px;
+}
