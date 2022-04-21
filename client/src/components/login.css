@@ -5,3 +5,7 @@ input{
 .login-form {
     padding: 50px;
 }
+
+.error {
+    color: rgb(153, 33, 33);
+}

@@ -7,29 +7,28 @@ import Login from "./components/login";
 import Register from "./components/register";
 import Dashboard from "./components/Dashboard/Dasboard";
 import Preferences from "./components/Preferences/Preferences";
+import useToken from "./components/useToken";
 
 function App() {
-  // const [token, setToken] = useState();
 
-  const [käyttäjä, asetaKäyttäjä] = useState({ tunnus: "", token: "" });
-  const [error, asetaError] = useState("");
+  const [käyttäjä, asetaKäyttäjä] = useState("");
 
+  const { token, asetaToken } = useToken();
+  
   const login = (tunnukset) => {
     console.log(tunnukset);
-    
-    if ( tunnukset.success ) {
-      asetaKäyttäjä({
-        tunnus: tunnukset.tunnus,
-        token: tunnukset.token
-      });
-      console.log("kirjattiin sisään !");
+    if (tunnukset.success) {
+      asetaToken(tunnukset.token);
+      asetaKäyttäjä(tunnukset.tunnus);
     } else {
-      console.log("tunnukset ei ollu oikeet tai jotain hajos");
+      console.log("jotain meni vikaan");
     }
   };
 
   const logout = () => {
     console.log("logout");
+    asetaToken("");
+    sessionStorage.clear();
   };
 
   return (
@@ -43,12 +42,14 @@ function App() {
           </li>
           <li>
             <div className="login-button">
-              {käyttäjä.tunnus !== "" ? (
+              {token === "testi123" ? (
                 <div className="tervetuloa">
                   <h2>
-                    Tervetuloa, <span>{käyttäjä.tunnus}, {käyttäjä.token}</span>
+                    Tervetuloa,{" "}
+                    <span>
+                      {käyttäjä.tunnus} ! 
+                    </span>
                   </h2>
-                  <button onClick={logout}>Kirjaudu ulos</button>
                 </div>
               ) : (
                 <Link to="login" className="header-button">
@@ -59,8 +60,8 @@ function App() {
           </li>
           <li>
             <div className="register-button">
-              {käyttäjä.tunnus !== "" ? (
-                <h2>:)</h2>
+              {token === "testi123" ? (
+                <button className="header-button" onClick={logout}>Kirjaudu ulos</button>
               ) : (
                 <Link to="register" className="header-button">
                   Tee käyttäjä
@@ -71,11 +72,11 @@ function App() {
         </ul>
         <Routes>
           <Route exact path="/" element={<Etusivu />}></Route>
-          <Route exact path="login" element={<Login login={login} error={error} />}></Route>
+          <Route exact path="login" element={<Login login={login} />}></Route>
           <Route exact path="register" element={<Register />}></Route>
         </Routes>
       </Router>
-      {käyttäjä.tunnus !== "" ? (
+      {token === "testi123" ? (
         <div className="wrapper">
           <Router>
             <button>

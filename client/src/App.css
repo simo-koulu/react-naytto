@@ -55,10 +55,12 @@ li {
   width: 100%;
   display: inline-block;
 
+  background-color: #0f165c;
   color: white;
   cursor: pointer;
   text-decoration: none;
   /* border: 1px solid green; */
+  border: none;
   font-size: 20px;
 }
 

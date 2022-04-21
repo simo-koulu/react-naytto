@@ -40,14 +40,10 @@ app.post("/login", (req, res) => {
       console.log(err);
       res.send("Väärä tunnus tai salasana");
     } else {
-      
       if (result < 10) {
-        res.send({status: 500})
+        res.send({ success: false });
       } else {
-        res.send({
-          status: 600,
-          token: "testi123",
-        })
+        res.send({ tunnus: LOGINtunnukset.k, token: "testi123", success: true });
       }
       console.log(result);
     }

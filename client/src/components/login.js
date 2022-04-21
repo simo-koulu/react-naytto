@@ -1,15 +1,15 @@
 import Axios from "axios";
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import PropTypes from "prop-types";
 
 import "./login.css";
 
-function Login({ login, error }) {
+function Login({ login }) {
   const [tunnus, uusiTunnus] = useState("");
   const [salasana, uusiSalasana] = useState("");
-  const [token, setToken] = useState("");
-  const [success, setSuccess] = useState(false);
+
+  const [error, asetaError] = useState("");
 
   const [pwd, setPwdShown] = useState(false);
 
@@ -17,36 +17,40 @@ function Login({ login, error }) {
     setPwdShown(!pwd);
   };
 
-  async function submitHandler(e) {
-    e.preventDefault();
+  const navigate = useNavigate();
 
-    const tunnukset = { tunnus, token, success };
+  const submitHandler = (e) => {
+    e.preventDefault();
 
     Axios.post("http://localhost:3001/login", {
       käyttäjätunnus: tunnus,
       salasana: salasana,
     }).then((response) => {
-      console.log(response);
+      if (response.data.success) {
+        console.log("onnistui");
 
-      if (response.data.status === 600) {
-        setToken(response.data.token);
-        setSuccess(true);
-      } else if (response.data.status === 500) {
+        const tunnukset = {
+          tunnus: response.data.tunnus,
+          token: response.data.token,
+          success: response.data.success,
+        };
+
+        login(tunnukset);
+
+        navigate("/");
+      } else if (!response.data.success) {
         console.log("jotain meni vikaan tai väärät tunnukset");
-        console.log("ERROR");
+        asetaError("tunnus tai salasana oli väärin");
       } else console.log("ERROR");
     });
-
-    console.log(tunnus, salasana);
-    login(tunnukset);
-  }
+  };
 
   return (
     <div className="login-form">
       <form onSubmit={submitHandler}>
         <h2>Kirjaudu sisään</h2>
         <br />
-        {/* ERROR */}
+        {(error !== "") ? (<> <div className="error">{error}</div><br /></>) : ""}
         <div className="form-group">
           <label htmlFor="tunnus">Käyttäjätunnus</label>
           <br />
