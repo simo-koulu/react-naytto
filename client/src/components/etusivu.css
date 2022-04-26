@@ -1,3 +1,19 @@
+* {
+    margin: 0;
+}
+
 .etusivu {
-    padding: 50px;
+    width: 100%;
+    aspect-ratio: 1280/300;
+
+    /* border: 1px solid green; */
+}
+
+.tervetuloa-message {
+    font-size: 3rem;
+    text-align: center;
+
+    margin-top: 10vh;
+
+    /* border: 1px solid blue; */
 }

@@ -1,8 +1,6 @@
 import Axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import PropTypes from "prop-types";
-
 import "./login.css";
 
 function Login({ login }) {
@@ -13,7 +11,8 @@ function Login({ login }) {
 
   const [pwd, setPwdShown] = useState(false);
 
-  const togglePwd = () => {
+  const togglePwd = (e) => {
+    e.preventDefault();
     setPwdShown(!pwd);
   };
 
@@ -48,39 +47,49 @@ function Login({ login }) {
   return (
     <div className="login-form">
       <form onSubmit={submitHandler}>
-        <h2>Kirjaudu sisään</h2>
-        <br />
-        {(error !== "") ? (<> <div className="error">{error}</div><br /></>) : ""}
-        <div className="form-group">
-          <label htmlFor="tunnus">Käyttäjätunnus</label>
+        <div className="login-form-inner">
+          <h2>Kirjaudu sisään</h2>
           <br />
-          <input
-            type="text"
-            id="tunnus"
-            name="tunnus"
-            onChange={(e) => {
-              uusiTunnus(e.target.value);
-            }}
-          />
-        </div>
-        <br />
-        <div className="form-group">
-          <label htmlFor="salasana">Salasana</label>
+          {error !== "" ? (
+            <>
+              {" "}
+              <div className="error">{error}</div>
+              <br />
+            </>
+          ) : (
+            ""
+          )}
+          <div className="form-group">
+            <label htmlFor="tunnus">Käyttäjätunnus</label>
+            <br />
+            <input
+              type="text"
+              id="tunnus"
+              name="tunnus"
+              onChange={(e) => {
+                uusiTunnus(e.target.value);
+              }}
+            />
+          </div>
           <br />
-          <input
-            type={pwd ? "text" : "password"}
-            id="password"
-            name="salasana"
-            onChange={(e) => {
-              uusiSalasana(e.target.value);
-            }}
-          />
-        </div>
-        <br />
+          <div className="form-group">
+            <label htmlFor="salasana">Salasana</label>
+            <br />
+            <input
+              type={pwd ? "text" : "password"}
+              id="password"
+              name="salasana"
+              onChange={(e) => {
+                uusiSalasana(e.target.value);
+              }}
+            />
+          </div>
+          <br />
 
-        <input type="submit" value="Kirjaudu sisään" />
+          <button onClick={togglePwd} className="button" >Näytä salasana</button>
+          <input type="submit" value="Kirjaudu sisään" className="button" />
+        </div>
       </form>
-      <button onClick={togglePwd}>Näytä salasana</button>
     </div>
   );
 }

@@ -4,8 +4,6 @@ import "./App.css";
 import Etusivu from "./components/etusivu";
 import Login from "./components/login";
 import Register from "./components/register";
-import Dashboard from "./components/Dashboard/Dasboard";
-import Preferences from "./components/Preferences/Preferences";
 import useToken from "./components/useToken";
 
 function App() {
@@ -71,24 +69,12 @@ function App() {
           </Routes>
         </Router>
         {token !== "" ? (
-          <div className="wrapper">
-            <Router>
-              <button>
-                <Link to="dashboard">testi</Link>
-              </button>
-              <button>
-                <Link to="preferences">testi1</Link>
-              </button>
-              <Routes>
-                <Route exact path="dashboard" element={<Dashboard />}></Route>
-                <Route exact path="preferences" element={<Preferences />}></Route>
-              </Routes>
-            </Router>
-          </div>
+          <div> </div>
         ) : (
           <h2>Kirjaudu sisään</h2>
         )}
       </div>
+      <p></p>
     </div>
   );
 }
