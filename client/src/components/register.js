@@ -31,12 +31,10 @@ function Register() {
         salasana: salasana,
       }).then((response) => {
         console.log(response);
-        console.log("lisättiin");
         if (response.status === 200) {
-          console.log("onnistui 200");
           navigate("/");
         } else {
-          console.log("jotain meni vikaan 200");
+          console.log("jotain meni vikaan");
         }
       });
     } else {

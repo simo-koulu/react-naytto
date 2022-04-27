@@ -26,8 +26,6 @@ function Login({ login }) {
       salasana: salasana,
     }).then((response) => {
       if (response.data.success) {
-        console.log("onnistui");
-
         const tunnukset = {
           tunnus: response.data.tunnus,
           token: response.data.token,
@@ -38,7 +36,6 @@ function Login({ login }) {
 
         navigate("/");
       } else if (!response.data.success) {
-        console.log("jotain meni vikaan tai väärät tunnukset");
         asetaError("tunnus tai salasana oli väärin");
       } else console.log("ERROR");
     });
@@ -86,7 +83,9 @@ function Login({ login }) {
           </div>
           <br />
 
-          <button onClick={togglePwd} className="button" >Näytä salasana</button>
+          <button onClick={togglePwd} className="button">
+            Näytä salasana
+          </button>
           <input type="submit" value="Kirjaudu sisään" className="button" />
         </div>
       </form>

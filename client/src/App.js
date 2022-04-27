@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { useState } from "react";
 
 import "./App.css";
 import Etusivu from "./components/etusivu";
@@ -9,6 +10,8 @@ import useToken from "./components/useToken";
 function App() {
   const { token, userName, removeUser, saveUser } = useToken();
 
+  const [logoutMessage, setLogoutMessage] = useState("");
+
   const login = (tunnukset) => {
     console.log(tunnukset);
     if (tunnukset.success) {
@@ -18,10 +21,17 @@ function App() {
     }
   };
 
-  const logout = () => {
-    console.log("logout");
-    removeUser();
+  const sleep = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   };
+
+  async function logout() {
+    removeUser();
+
+    setLogoutMessage("Kirjauduit ulos onnistuneesti!");
+    await sleep(8000);
+    setLogoutMessage("");
+  }
 
   return (
     <div className="App">
@@ -63,18 +73,12 @@ function App() {
             </li>
           </ul>
           <Routes>
-            <Route exact path="/" element={<Etusivu />}></Route>
+            <Route exact path="/" element={<Etusivu logout={logoutMessage} />}></Route>
             <Route exact path="login" element={<Login login={login} />}></Route>
             <Route exact path="register" element={<Register />}></Route>
           </Routes>
         </Router>
-        {token !== "" ? (
-          <div> </div>
-        ) : (
-          <h2>Kirjaudu sisään</h2>
-        )}
       </div>
-      <p></p>
     </div>
   );
 }

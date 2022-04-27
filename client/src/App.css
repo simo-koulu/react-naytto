@@ -18,31 +18,21 @@ body {
 
 .header-container {
   list-style: none;
-  /* border: 1px solid blue; */
 
   display: flex;
   padding-left: 0;
   background-color: #0f165c;
-
-  /* aspect-ratio: 900/43;
-  width: 100%;
-  background-image: url("../public/layered-waves-haikei.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover; */
 }
 
 .header-container::after {
   content: "";
   clear: both;
   display: table;
-} 
+}
 
 li {
   width: 33.3%;
   height: 10vh;
-
-  /* border: 1px solid red; */
 
   left: 0;
   text-align: center;
@@ -55,17 +45,14 @@ li {
   display: inline-block;
 
   background-color: #5f0d0d;
-  /* background-color: #0f165c; */
   color: white;
   cursor: pointer;
   text-decoration: none;
-  /* border: 1px solid green; */
   border: none;
   font-size: 20px;
 }
 
 .header-button:hover {
-  /* background-color: #285cbd; */
   background-color: #832929;
   transition: 100ms;
 }
@@ -79,14 +66,11 @@ li {
 }
 
 .hero-image {
-  /* aspect-ratio: 900/400; */
   height: 100vh;
   width: 100%;
 
-  background-image: url('../public/hero-image.svg');
+  background-image: url("../public/hero-image.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-
-  /* border: 1px solid green; */
 }

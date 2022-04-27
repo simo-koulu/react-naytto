@@ -4,7 +4,12 @@
   box-sizing: border-box;
 }
 
-.register-form input, button {
+.register-form .error {
+  color: #e44d4d;
+}
+
+.register-form input,
+button {
   appearance: none;
   background: none;
   border: none;
@@ -28,7 +33,7 @@
 }
 
 .register-form form::after {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   top: -5px;
@@ -36,13 +41,13 @@
   right: -5px;
   bottom: -5px;
   z-index: 1;
-  background-image: linear-gradient(100deg, rgba(28,31,69,1) 16%, rgba(121,9,53,1) 56%, rgba(53,124,149,1) 87%);
+  background-image: linear-gradient(100deg, rgba(28, 31, 69, 1) 16%, rgba(121, 9, 53, 1) 56%, rgba(53, 124, 149, 1) 87%);
 }
 
 .register-form form .register-form-inner {
   position: relative;
   display: block;
-  background-color:#1a1924;
+  background-color: #1a1924;
   padding: 20px;
   z-index: 2;
 
