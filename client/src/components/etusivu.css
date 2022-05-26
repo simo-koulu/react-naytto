@@ -5,20 +5,61 @@
 .etusivu {
   width: 100%;
   aspect-ratio: 1280/300;
+  
+  margin-top: 0;
 }
 
 .tervetuloa-message {
   font-size: 3rem;
   text-align: center;
 
-  margin-top: 10vh;
+  margin-top: 5vh;
 }
 
 .logout-message {
   font-size: 2rem;
   text-align: center;
 
-  margin-top: 5vh;
-
   transition: 0.5s;
+}
+
+.header-container {
+  list-style: none;
+
+  display: flex;
+  padding-left: 0;
+  background-color: #0f165c;
+}
+
+.header-container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+li {
+  width: 50%;
+  height: 10vh;
+
+  left: 0;
+  text-align: center;
+  line-height: 9vh;
+}
+
+.header-button {
+  height: 10vh;
+  width: 100%;
+  display: inline-block;
+
+  background-color: #5f0d0d;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  font-size: 20px;
+}
+
+.header-button:hover {
+  background-color: #832929;
+  transition: 100ms;
 }

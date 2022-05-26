@@ -34,7 +34,7 @@ function Login({ login }) {
 
         login(tunnukset);
 
-        navigate("/");
+        navigate("etusivu");
       } else if (!response.data.success) {
         asetaError("tunnus tai salasana oli väärin");
       } else console.log("ERROR");
