@@ -32,7 +32,7 @@ function Register() {
       }).then((response) => {
         console.log(response);
         if (response.status === 200) {
-          navigate("/");
+          navigate(-1);
         } else {
           console.log("jotain meni vikaan");
         }
